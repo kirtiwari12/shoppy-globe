@@ -1,8 +1,9 @@
 import { CartItem } from "./CartItem";
-import { useSelector } from "react-redux";
+import { useCart, useCartTotal } from "../store/slices/cart";
 
 export const Cart = () => {
-  const cart = useSelector((state) => state.cart.cart);
+  const cart = useCart();
+  const cartTotal = useCartTotal();
 
   return (
     <>
@@ -17,15 +18,7 @@ export const Cart = () => {
             ))}
 
             <div className="flex justify-between border-y-4 font-bold border-y-gray-900 rounded-xl md:mx-4 p-4 my-4">
-              <div>Total:</div>$
-              {cart
-                .reduce((acc, product) => {
-                  const totalForProduct = +(
-                    product.price * product.quantity
-                  ).toFixed(2);
-                  return acc + totalForProduct;
-                }, 0)
-                .toFixed(2)}
+              <div>Total:</div>${cartTotal}
             </div>
           </>
         )}

@@ -1,9 +1,9 @@
 import { Link } from "react-router";
-import { useSelector } from "react-redux";
+import { useTotalItemsInCart } from "../store/slices/cart";
 
 export const Header = () => {
-  const cart = useSelector((state) => state.cart.cart);
-  const totalItemsInCart = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const totalItemsInCart = useTotalItemsInCart();
+
   return (
     <div className="border-b border-gray-200 mb-5 ">
       <div className="flex justify-between items-center p-4 container mx-auto px-4">
@@ -19,7 +19,7 @@ export const Header = () => {
                   {totalItemsInCart}
                 </span>
               )}
-              <i class="fa-xl fa-solid fa-cart-shopping"></i>
+              <i className="fa-xl fa-solid fa-cart-shopping"></i>
             </div>
           </Link>
         </div>

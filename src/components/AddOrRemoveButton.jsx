@@ -1,19 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addToCart,
   removeFromCart,
   deleteFromCart,
+  useProductQuantity,
 } from "../store/slices/cart";
 
 export const AddOrRemoveButton = ({ product, showDeleteButton = false }) => {
   const dispatch = useDispatch();
-
-  const productQuantity = useSelector((state) => {
-    return (
-      state.cart.cart.find((item) => item.id === product.id)?.quantity || 0
-    );
-  });
-
+  const productQuantity = useProductQuantity(product.id);
   const isProductInCart = productQuantity > 0;
 
   const handleAddToCart = (e) => {

@@ -13,13 +13,13 @@ export const Header = () => {
         </Link>
         <div className="flex items-center gap-4">
           <Link to="/cart">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 relative">
               {totalItemsInCart > 0 && (
-                <span className="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center absolute -top-5 -right-2">
                   {totalItemsInCart}
                 </span>
               )}
-              Cart
+              <i class="fa-xl fa-solid fa-cart-shopping"></i>
             </div>
           </Link>
         </div>

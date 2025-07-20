@@ -1,4 +1,10 @@
-import { AddOrRemoveButton } from "./AddOrRemoveButton";
+import { lazy, Suspense } from "react";
+
+const AddOrRemoveButton = lazy(() =>
+  import("./AddOrRemoveButton").then((module) => ({
+    default: module.AddOrRemoveButton,
+  }))
+);
 
 export const CartItem = ({ product }) => {
   return (
@@ -16,7 +22,9 @@ export const CartItem = ({ product }) => {
           {product.price} x {product.quantity} = $
           {+(product.price * product.quantity).toFixed(2)}
         </p>
-        <AddOrRemoveButton product={product} showDeleteButton={true} />
+        <Suspense>
+          <AddOrRemoveButton product={product} showDeleteButton={true} />
+        </Suspense>
       </div>
     </div>
   );

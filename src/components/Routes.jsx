@@ -4,19 +4,35 @@ import {
   Navigate,
   Outlet,
 } from "react-router";
-import { Home } from "./Home";
-import { BadRoute } from "./BadRoute";
-import { ProductDescription } from "./ProductDescription";
-import { Cart } from "./Cart";
+import { lazy, Suspense } from "react";
 import { Header } from "./Header";
+import { ErrorBoundary } from "./ErrorBoundary";
 
-// Layout component that includes Header and renders child routes
+const Home = lazy(() =>
+  import("./Home").then((module) => ({ default: module.Home }))
+);
+const ProductDescription = lazy(() =>
+  import("./ProductDescription").then((module) => ({
+    default: module.ProductDescription,
+  }))
+);
+const Cart = lazy(() =>
+  import("./Cart").then((module) => ({ default: module.Cart }))
+);
+const BadRoute = lazy(() =>
+  import("./BadRoute").then((module) => ({ default: module.BadRoute }))
+);
+
 const Layout = () => {
   return (
     <>
       <Header />
       <div className="container mx-auto px-4">
-        <Outlet />
+        <ErrorBoundary fallbackMessage="Failed to load page content. Please try refreshing the page.">
+          <Suspense>
+            <Outlet />
+          </Suspense>
+        </ErrorBoundary>
       </div>
     </>
   );

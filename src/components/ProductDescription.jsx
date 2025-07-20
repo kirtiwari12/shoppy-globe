@@ -1,6 +1,12 @@
 import { useParams } from "react-router";
-import { AddOrRemoveButton } from "./AddOrRemoveButton";
+import { lazy, Suspense } from "react";
 import { useGetProductDetails } from "../hooks/useGetProductDetails";
+
+const AddOrRemoveButton = lazy(() =>
+  import("./AddOrRemoveButton").then((module) => ({
+    default: module.AddOrRemoveButton,
+  }))
+);
 
 export const ProductDescription = () => {
   const { id } = useParams();
@@ -19,7 +25,9 @@ export const ProductDescription = () => {
         <h3 className="text-2xl font-bold">{product.title}</h3>
         <p className="text-gray-500">{product.description}</p>
         <p className="text-2xl font-bold">{product.price}</p>
-        <AddOrRemoveButton product={product} />
+        <Suspense>
+          <AddOrRemoveButton product={product} />
+        </Suspense>
       </div>
     </div>
   );

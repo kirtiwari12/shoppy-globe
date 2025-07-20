@@ -1,5 +1,11 @@
 import { Link } from "react-router";
-import { AddOrRemoveButton } from "./AddOrRemoveButton";
+import { lazy, Suspense } from "react";
+
+const AddOrRemoveButton = lazy(() =>
+  import("./AddOrRemoveButton").then((module) => ({
+    default: module.AddOrRemoveButton,
+  }))
+);
 
 export const ProductItem = ({ product }) => {
   return (
@@ -26,7 +32,9 @@ export const ProductItem = ({ product }) => {
               ${product.price}
             </p>
 
-            <AddOrRemoveButton product={product} />
+            <Suspense>
+              <AddOrRemoveButton product={product} />
+            </Suspense>
           </div>
         </div>
       </div>

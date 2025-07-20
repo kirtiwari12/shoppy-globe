@@ -1,14 +1,8 @@
-import { useEffect, useState } from "react";
 import { ProductItem } from "./ProductItem";
+import { useGetAllProducts } from "../hooks/useGetAllProducts";
 
 export const ProductList = () => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    fetch("https://dummyjson.com/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data.products));
-  }, []);
+  const products = useGetAllProducts();
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

@@ -1,16 +1,10 @@
 import { useParams } from "react-router";
-import { useEffect, useState } from "react";
 import { AddOrRemoveButton } from "./AddOrRemoveButton";
+import { useGetProductDetails } from "../hooks/useGetProductDetails";
 
 export const ProductDescription = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState({});
-
-  useEffect(() => {
-    fetch(`https://dummyjson.com/products/${id}`)
-      .then((res) => res.json())
-      .then((data) => setProduct(data));
-  }, [id]);
+  const product = useGetProductDetails(id);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-8 md:px-0">

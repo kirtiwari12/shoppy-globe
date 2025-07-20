@@ -1,6 +1,9 @@
 import { Link } from "react-router";
+import { useSelector } from "react-redux";
 
 export const Header = () => {
+  const cart = useSelector((state) => state.cart.cart);
+
   return (
     <div className="border-b border-gray-200 mb-5 ">
       <div className="flex justify-between items-center p-4 container mx-auto px-4">
@@ -9,7 +12,14 @@ export const Header = () => {
           <h1 className="text-2xl font-bold">Shoppy Globe</h1>
         </Link>
         <div className="flex items-center gap-4">
-          <Link to="/cart">Cart</Link>
+          <Link to="/cart">
+            <div className="flex items-center gap-2">
+              <span className="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {cart.reduce((acc, item) => acc + item.quantity, 0)}
+              </span>
+              Cart
+            </div>
+          </Link>
         </div>
       </div>
     </div>

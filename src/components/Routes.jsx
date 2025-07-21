@@ -53,6 +53,10 @@ export const Routes = () => {
           Component: Home,
         },
         {
+          path: "search",
+          Component: Home,
+        },
+        {
           path: "product/:id",
           Component: ProductDescription,
         },

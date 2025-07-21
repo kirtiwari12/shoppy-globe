@@ -1,8 +1,18 @@
 import { Link } from "react-router";
 import { useTotalItemsInCart } from "../store/slices/cart";
+import { useEffect, useState } from "react";
+import { Search } from "./Search";
+import { useSearchParams } from "react-router";
 
 export const Header = () => {
+  const [searchParams] = useSearchParams();
+  const searchValue = searchParams.get("q");
+  const [search, setSearch] = useState(searchValue || "");
   const totalItemsInCart = useTotalItemsInCart();
+
+  useEffect(() => {
+    setSearch(searchValue || "");
+  }, [searchValue]);
 
   return (
     <div className="border-b border-gray-200 mb-5 ">
@@ -12,6 +22,12 @@ export const Header = () => {
           <h1 className="text-2xl font-bold">Shoppy Globe</h1>
         </Link>
         <div className="flex items-center gap-4">
+          <Search
+            searchValue={search}
+            setSearchValue={setSearch}
+            className="hidden sm:block"
+          />
+
           <Link to="/cart">
             <div className="flex items-center gap-2 relative">
               {totalItemsInCart > 0 && (
@@ -23,6 +39,13 @@ export const Header = () => {
             </div>
           </Link>
         </div>
+      </div>
+      <div className=" sm:hidden container mx-auto my-4 px-4">
+        <Search
+          searchValue={search}
+          setSearchValue={setSearch}
+          className="w-full"
+        />
       </div>
     </div>
   );

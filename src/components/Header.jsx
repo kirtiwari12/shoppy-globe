@@ -15,7 +15,7 @@ export const Header = () => {
   }, [searchValue]);
 
   return (
-    <div className="border-b border-gray-200 mb-5 ">
+    <div className="border-b border-gray-200 mb-5 sticky top-0 bg-white z-10">
       <div className="flex justify-between items-center p-4 container mx-auto px-4">
         <Link to="/" className="flex items-center gap-2">
           <img src="/logo.png" alt="Shoppy Globe" className="w-10 h-10" />

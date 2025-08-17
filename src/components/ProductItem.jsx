@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { lazy, Suspense } from "react";
+import PropTypes from "prop-types";
 
 const AddOrRemoveButton = lazy(() =>
   import("./AddOrRemoveButton").then((module) => ({
@@ -40,4 +41,8 @@ export const ProductItem = ({ product }) => {
       </div>
     </Link>
   );
+};
+
+ProductItem.propTypes = {
+  product: PropTypes.object.isRequired,
 };

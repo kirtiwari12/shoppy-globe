@@ -5,6 +5,7 @@ import {
   deleteFromCart,
   useProductQuantity,
 } from "../store/slices/cart";
+import PropTypes from "prop-types";
 
 export const AddOrRemoveButton = ({ product, showDeleteButton = false }) => {
   const dispatch = useDispatch();
@@ -64,4 +65,9 @@ export const AddOrRemoveButton = ({ product, showDeleteButton = false }) => {
       )}
     </div>
   );
+};
+
+AddOrRemoveButton.propTypes = {
+  product: PropTypes.object.isRequired,
+  showDeleteButton: PropTypes.bool,
 };

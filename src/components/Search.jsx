@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router";
+import PropTypes from "prop-types";
+
 export const Search = ({ searchValue, setSearchValue, className = "" }) => {
   const navigate = useNavigate();
 
@@ -34,4 +36,10 @@ export const Search = ({ searchValue, setSearchValue, className = "" }) => {
       </form>
     </div>
   );
+};
+
+Search.propTypes = {
+  searchValue: PropTypes.string.isRequired,
+  setSearchValue: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };

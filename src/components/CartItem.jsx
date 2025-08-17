@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import PropTypes from "prop-types";
 
 const AddOrRemoveButton = lazy(() =>
   import("./AddOrRemoveButton").then((module) => ({
@@ -28,4 +29,8 @@ export const CartItem = ({ product }) => {
       </div>
     </div>
   );
+};
+
+CartItem.propTypes = {
+  product: PropTypes.object.isRequired,
 };
